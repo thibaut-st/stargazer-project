@@ -22,7 +22,7 @@ StarneighbourData = dict[str, list[str]]
 
 class GitHubBusiness:
     """
-    GitHubUtils
+    GitHubBusiness class to handle GitHub REST API requests and transform the data
     """
 
     @staticmethod
@@ -69,6 +69,8 @@ class GitHubBusiness:
 
         :param user_name: The username of the repository's owner
         :param repository_name: The repository's name to check
+        :param per_page: The number of stargazers for the repository per page
+        :param page: Page number of the result to fetch
         :return: The list of stargazers
         """
         url_stargazers = (
