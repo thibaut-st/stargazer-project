@@ -6,6 +6,10 @@ For more information see https://mergify.notion.site/Stargazer-4cf5427e34a542f0a
 
 ----
 
+# Install
+
+Run "poetry install"
+
 # Usage
 
 To start the API run "python -m uvicorn main:app"
