@@ -32,9 +32,3 @@ repos:
         language: system
         types: [ python ]
         pass_filenames: false
-      - id: bandit
-        name: bandit
-        entry: bandit
-        args: [ -r, . ]
-        language: system
-        types: [ python ]

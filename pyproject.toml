@@ -43,8 +43,8 @@ profile = "black"
 python_version = "3.11"
 strict = true
 
-[tool.pylint.master]
-init-hook = "from pylint.config import find_pylintrc; import os, sys; sys.path.append(os.path.dirname(find_pylintrc()))"
+[tool.pylint.main]
+extension-pkg-whitelist = "pydantic"
 
 [tool.pylint.messages_control]
 max-line-length = 120
