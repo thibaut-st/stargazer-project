@@ -67,16 +67,16 @@ async def get_rate_limit() -> RateLimit:
 
 @app.get("/repos/{user}/{repo}/starneighbours", dependencies=[Depends(manager)])
 async def get_starneighbours(
-    username: str,
-    repository: str,
+    user: str,
+    repo: str,
     per_page: int = Query(default=30, gt=0, le=100),
     page: int = Query(default=1, ge=1),
 ) -> list[Starneighbour]:
     """
     Get the list of neighbours repositories of a GitHub repository
 
-    :param username: The username of the repository's owner
-    :param repository: The repository's name to check
+    :param user: The username of the repository's owner
+    :param repo: The repository's name to check
     :param per_page: The number of stargazers for the repository per page
     :param page: Page number of the result to fetch
     :return: The list of neighbours repositories and common stargazers from the given repository
@@ -86,7 +86,7 @@ async def get_starneighbours(
                 ...
             ])
     """
-    stargazers = await GitHubBusiness.get_stargazers(username, repository, per_page, page)
-    starneighbours = await GitHubBusiness.get_starneighbours(stargazers, repository)
+    stargazers = await GitHubBusiness.get_stargazers(user, repo, per_page, page)
+    starneighbours = await GitHubBusiness.get_starneighbours(stargazers, repo)
 
     return starneighbours

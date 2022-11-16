@@ -32,6 +32,7 @@ sphinx = "^5.3.0"
 
 # SETTINGS
 datamodel-code-generator = "^0.13.5"
+httpx = "^0.23.0"
 
 [tool.black]
 line-length = 120

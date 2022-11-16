@@ -42,18 +42,6 @@ class GitHubBusiness:
         Return the different rates limit from GitHub
 
         :return: The rate limit details
-            (e.g. {
-                  "resources": {
-                    "core": {
-                      "limit": 5000,
-                      "used": 10,
-                      "remaining": 4990,
-                      "reset": 1668548968
-                    },
-                    ...
-                  },
-                  ...
-                })
         """
         url_rate_limit = "https://api.github.com/rate_limit"
         async with aiohttp.ClientSession() as session:
@@ -77,9 +65,9 @@ class GitHubBusiness:
             f"https://api.github.com/repos/{user_name}/{repository_name}/stargazers?per_page={per_page}&page={page}"
         )
         async with aiohttp.ClientSession() as session:
-            stargazer_list_json = await GitHubBusiness._github_http_get(url_stargazers, session)
+            stargazer_list_data = await GitHubBusiness._github_http_get(url_stargazers, session)
 
-        stargazers = [Stargazer(**stargazer_json) for stargazer_json in stargazer_list_json]
+        stargazers = [Stargazer(**stargazer_data) for stargazer_data in stargazer_list_data]
 
         return stargazers
 
@@ -138,9 +126,9 @@ class GitHubBusiness:
         :return: The list of starred repositories
         """
         url_starred = f"https://api.github.com/users/{user_name}/starred"
-        starred_list_json = await GitHubBusiness._github_http_get(url_starred, session)
+        starred_list_data = await GitHubBusiness._github_http_get(url_starred, session)
 
-        starred_list = [Starred(**starred_json) for starred_json in starred_list_json]
+        starred_list = [Starred(**starred_data) for starred_data in starred_list_data]
 
         return starred_list
 
