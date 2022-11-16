@@ -17,6 +17,11 @@ To start the API run "python -m uvicorn main:app"
 
 Once started, to easily try the application, go to http://127.0.0.1:8000/docs
 
+Hard coded credentials: 
+ 
+  - username: thibaut.st@gmail.com
+  - password: admin
+
 # Improvement
 
 Ways to improve the application as it is:
@@ -29,6 +34,7 @@ Ways to improve the application as it is:
     - or addition of a database + routes to handle the management of users (create/update/delete)
 - Move sensible data to environment variable (e.g. secret key)
 - Improve the efficiency (need research)
+- Add checking of GitHub responses
 
 ## Functional way
 
