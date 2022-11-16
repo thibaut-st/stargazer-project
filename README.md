@@ -34,5 +34,6 @@ Ways to improve the application as it is:
 
 - Allow the user to provide its own GitHub user and token for API requests
 - Allow the user to fetch multiple (all) pages for the starneighbours endpoint
+- Allow the user to order the starneighbours as he wants
 - Add error message if the rate limit of GitHub REST API is met
 - Improve documentation (e.g. sphinx)
