@@ -87,8 +87,6 @@ async def get_starneighbours(
             ])
     """
     stargazers = await GitHubBusiness.get_stargazers(username, repository, per_page, page)
-    starneighbours = await GitHubBusiness.get_starneighbours(stargazers)
-
-    starneighbours = [starneighbour for starneighbour in starneighbours if starneighbour.repo != repository]
+    starneighbours = await GitHubBusiness.get_starneighbours(stargazers, repository)
 
     return starneighbours

@@ -84,11 +84,12 @@ class GitHubBusiness:
         return stargazers
 
     @staticmethod
-    async def get_starneighbours(stargazers: list[Stargazer]) -> list[Starneighbour]:
+    async def get_starneighbours(stargazers: list[Stargazer], repository: str) -> list[Starneighbour]:
         """
         Get the starneighbours from the given list of stargazers
 
         :param stargazers: The list of stargazers to check
+        :param repository: The repository's name of which we look for neighbours
         :return: The list of starneighbours
             (i.e. [
                 {"repo": <repoA>, "stargazers": [<stargazers in common>, ...],},
@@ -110,7 +111,7 @@ class GitHubBusiness:
 
             await gather(*tasks)
 
-        starneighbours = GitHubBusiness._generate_starneighbours(starneighbours_data)
+        starneighbours = GitHubBusiness._generate_starneighbours(starneighbours_data, repository)
 
         return starneighbours
 
@@ -165,12 +166,16 @@ class GitHubBusiness:
                     starneighbours_data[starred.name].append(user_name)
 
     @staticmethod
-    def _generate_starneighbours(starneighbours_data: StarneighbourData) -> list[Starneighbour]:
+    def _generate_starneighbours(starneighbours_data: StarneighbourData, repository: str) -> list[Starneighbour]:
         """
         From the formatted data dictionary, generate a list of Starneighbour objects
 
         :param starneighbours_data: The formatted data dictionary
+        :param repository: The repository's name of which we look for neighbours
         """
+        # Remove itself from the list of neighbours
+        starneighbours_data.pop(repository)
+
         starneighbours: list[Starneighbour] = []
         for repository_name, stargazers_name in starneighbours_data.items():
             starneighbours.append(Starneighbour(repo=repository_name, stargazers=stargazers_name))
