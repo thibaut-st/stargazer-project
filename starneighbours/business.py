@@ -15,7 +15,7 @@ from aiohttp.client import ClientSession
 from starneighbours.models import RateLimit, Stargazer, Starneighbour, Starred
 
 GITHUB_USER = "thibaut-st"
-GITHUB_TOKEN = "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"
+GITHUB_TOKEN = "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"
 
 StarneighbourData = dict[str, list[str]]
 
