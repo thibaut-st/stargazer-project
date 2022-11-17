@@ -15,7 +15,7 @@ from aiohttp.client import ClientSession
 from starneighbours.models import RateLimit, Stargazer, Starneighbour, Starred
 
 GITHUB_USER = "thibaut-st"
-GITHUB_TOKEN = "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"
+GITHUB_TOKEN = "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"
 
 StarneighbourData = dict[str, list[str]]
 
@@ -26,15 +26,22 @@ class GitHubBusiness:
     """
 
     @staticmethod
-    async def _github_http_get(url: str, session: ClientSession) -> dict[Any, Any]:
+    async def _github_http_get(url: str, session: ClientSession, with_auth: bool = True) -> dict[Any, Any]:
         """
         Send a http get request to the given GitHub url
 
         :param url: The url to request
         :return: The json response as a dict
         """
-        async with session.get(url, auth=aiohttp.BasicAuth(GITHUB_USER, GITHUB_TOKEN)) as response:
-            return await response.json()  # type: ignore[no-any-return]
+        auth = aiohttp.BasicAuth(GITHUB_USER, GITHUB_TOKEN) if with_auth else None
+        async with session.get(url, auth=auth) as response:
+            response_data = await response.json()
+
+            # If the credential is wrong (revoked token), retry without auth
+            if response.status == 401 and response_data.get("message") == "Bad credentials":
+                return await GitHubBusiness._github_http_get(url, session, False)
+
+            return response_data  # type: ignore[no-any-return]
 
     @staticmethod
     async def get_rate_limit() -> RateLimit:
