@@ -6,6 +6,11 @@ For more information see https://mergify.notion.site/Stargazer-4cf5427e34a542f0a
 
 ----
 
+# WARNING
+
+The GitHub token is revoked when the project is pushed on GitHub;
+please generate a new one and add it in business.py -> GITHUB_TOKEN
+
 # Install
 
 Run "poetry install"
@@ -17,10 +22,10 @@ To start the API run "python -m uvicorn main:app"
 
 Once started, to easily try the application, go to http://127.0.0.1:8000/docs
 
-Hard coded credentials: 
- 
-  - username: thibaut.st@gmail.com
-  - password: admin
+Hard coded credentials:
+
+- username: thibaut.st@gmail.com
+- password: admin
 
 # Improvement
 
